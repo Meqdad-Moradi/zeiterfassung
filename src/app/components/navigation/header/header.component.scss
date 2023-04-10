@@ -1,0 +1,17 @@
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.mat-expansion-panel {
+  background-color: var(--color-primary);
+
+  .cta {
+    display: flex;
+    gap: 2em;
+  }
+}

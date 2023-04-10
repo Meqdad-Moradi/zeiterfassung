@@ -1,0 +1,18 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Zeiterfassung </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- cta -->
+    <div class="cta">
+      <button mat-raised-button color="accent" (click)="startTime()">
+        Zeit antragen
+      </button>
+      <button mat-raised-button color="accent">Zeit austragen</button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<h1>{{ date }}</h1>
+<h1>{{ time }}</h1>
