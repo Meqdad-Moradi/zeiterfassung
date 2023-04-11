@@ -1,0 +1,21 @@
+footer {
+  padding-block: 2em;
+  background-color: var(--color-neutral-900);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--box-shadow);
+
+  h1 {
+    color: var(--color-neutral-200);
+    letter-spacing: 1px;
+  }
+
+  p {
+    color: var(--color-neutral-400);
+  }
+
+  small {
+    color: var(--color-neutral-500);
+    margin-top: 1em;
+  }
+}

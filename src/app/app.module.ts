@@ -15,9 +15,10 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { DatePipe } from '@angular/common';
+import { ResultComponent } from './components/pages/result/result.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, ResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

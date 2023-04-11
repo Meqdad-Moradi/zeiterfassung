@@ -6,9 +6,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GetTimesService {
-  constructor(private http: HttpClient) {}
+  private timeWorkedToday = 0;
+  private timeWorkedThisMonth = 0;
+
+  constructor(private http: HttpClient) {
+    this.timeWorkedToday =
+      parseInt(localStorage.getItem('timeWorkedToday')!) || 0;
+    this.timeWorkedThisMonth =
+      parseInt(localStorage.getItem('timeWorkedThisMonth')!) || 0;
+  }
 
   fetchTime(): Observable<any> {
     return this.http.get('./assets/data.json');
+  }
+
+  addTime(time: number): void {
+    this.timeWorkedToday += time;
+    this.timeWorkedThisMonth += time;
+    localStorage.setItem('timeWorkedToday', this.timeWorkedToday.toString());
+    localStorage.setItem(
+      'timeWorkedThisMonth',
+      this.timeWorkedThisMonth.toString()
+    );
+  }
+
+  getTimeToday(): number {
+    return this.timeWorkedToday;
+  }
+
+  getTimeThisMonth(): number {
+    return this.timeWorkedThisMonth;
   }
 }
