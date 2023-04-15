@@ -1,0 +1,50 @@
+.showcase {
+  padding-block: 3em;
+
+  .cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+    button {
+      background-color: var(--color-primary);
+    }
+
+    button .mat-icon {
+      scale: 0.8;
+      margin-left: 0.2em;
+    }
+  }
+
+  .details {
+    margin-top: 2em;
+    padding: 2em;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+
+    .details-title {
+      margin-bottom: 1em;
+      color: var(--color-primary);
+    }
+  }
+
+  article {
+    display: flex;
+
+    .time-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2em;
+      padding: 0.5em 0;
+      border-bottom: 1px solid var(--color-neutral-200);
+
+      &:first-of-type {
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

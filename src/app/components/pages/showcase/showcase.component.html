@@ -1,32 +1,49 @@
-<!-- cta -->
-<div class="cta">
-  <button
-    mat-raised-button
-    [color]="timeStarted ? 'disabled' : 'primary'"
-    [disabled]="timeStarted"
-    (click)="startTimer()"
-  >
-    Zeit antragen</button
-  >&nbsp;
-  <button mat-raised-button color="primary" (click)="stopTimer()">
-    Zeit austragen
-  </button>
-  &nbsp;
-  <button mat-raised-button color="accent" (click)="totalTime()">
-    Total Time</button
-  >&nbsp;
+<section class="showcase">
+  <div class="container">
+    <div class="cta">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!timeStarted"
+        (click)="startTime()"
+      >
+        Eintragen
+        <mat-icon>schedule</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="timeStarted"
+        (click)="endTime()"
+      >
+        Austragen
+        <mat-icon>lock_clock</mat-icon>
+      </button>
+    </div>
 
-  <div style="margin-top: 2em">
-    <button mat-raised-button color="primary" (click)="addTime()">
-      Add Time
-    </button>
-    <ul>
-      <li *ngFor="let time of times">{{ time }}</li>
-    </ul>
-    <p>Total Hours: {{ totalHours }}</p>
+    <!-- details -->
+    <div class="details">
+      <h3 class="details-title">Zeit eintragen Details</h3>
+
+      <article>
+        <div>
+          <div class="time-details">
+            <span>Datum</span>
+            <span>Von</span>
+          </div>
+          <div class="time-details" *ngFor="let date of times.startTimes">
+            <span>{{ date | date : "EE dd.MM.yyyy" }}</span>
+            <span>{{ date | date : "HH:mm" }}</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="time-details"><span>Bis</span></div>
+          <div class="time-details" *ngFor="let date of times.endTimes">
+            <span>{{ date | date : "HH:mm" }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
   </div>
-</div>
-
-<h1>{{ startTime | date : "dd.MM.yyyy HH:mm" }}</h1>
-<h1>{{ endTime | date : "dd.MM.yyyy HH:mm" }}</h1>
-<h1>{{ timeWorked }}</h1>
+</section>

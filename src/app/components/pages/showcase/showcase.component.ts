@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { ITimes } from 'src/app/modules/times';
 import { GetTimesService } from 'src/app/services/get-times.service';
 
 @Component({
@@ -8,55 +9,32 @@ import { GetTimesService } from 'src/app/services/get-times.service';
   styleUrls: ['./showcase.component.scss'],
 })
 export class ShowcaseComponent implements OnInit {
-  panelOpenState = false;
-  startTime!: any;
-  endTime!: any;
-  timeWorked!: any;
-  hours: any;
-  minutes: any;
-
+  times!: ITimes;
+  totalHours = 0;
   timeStarted: boolean = false;
-
-  // times: Date[] = [];
-
-  public times: string[] = [];
-  public totalHours = 0;
 
   constructor(private getTimesService: GetTimesService) {}
 
   ngOnInit(): void {
     this.times = this.getTimesService.getTimes();
-    this.totalHours = this.getTimesService.getTotalHours();
-
-    this.totalTime();
-  }
-
-  public addTime(): void {
-    this.getTimesService.addCurrentTime();
-    this.times = this.getTimesService.getTimes();
-    this.totalHours = this.getTimesService.getTotalHours();
-  }
-
-  /**
-   * startTimer
-   */
-  startTimer() {
-    this.startTime = new Date().toString();
-    localStorage.setItem('startTime', JSON.stringify(this.startTime));
     this.timeStarted = true;
   }
 
   /**
-   * stopTimer
+   * startTime
    */
-  stopTimer() {
-    this.endTime = new Date().toString();
-    this.times = [...this.times, this.endTime];
-
-    localStorage.setItem('endTime', JSON.stringify(this.endTime));
-    localStorage.setItem('times', JSON.stringify(this.times));
-
+  startTime(): void {
+    this.getTimesService.addCurrentTime();
+    this.times = this.getTimesService.getTimes();
     this.timeStarted = false;
+  }
+
+  /**
+   * endTime
+   */
+  endTime(): void {
+    this.getTimesService.addEndTime();
+    this.timeStarted = !this.timeStarted;
   }
 
   /**
@@ -67,18 +45,9 @@ export class ShowcaseComponent implements OnInit {
     const start = moment(JSON.parse(localStorage.getItem('startTime')!));
     const end = moment(JSON.parse(localStorage.getItem('endTime')!));
 
-    this.hours = moment(end.diff(start, 'hours', true));
-    this.minutes = moment(end.diff(start, 'minutes', true) % 60);
+    const hours = moment(end.diff(start, 'hours', true));
+    const minutes = moment(end.diff(start, 'minutes', true) % 60);
 
-    this.timeWorked =
-      this.hours.toString().padStart(2, '0') + ':' + this.minutes;
-
-    // array manipulation
-    const now = new Date();
-    const hour = now.getHours().toString().padStart(2, '0');
-    const min = now.getMinutes().toString().padStart(2, '0');
-
-    const result = `${hour}:${min}`;
-    console.log(result);
+    console.log(hours, minutes);
   }
 }
