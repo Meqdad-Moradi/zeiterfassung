@@ -1,0 +1,32 @@
+<!-- cta -->
+<div class="cta">
+  <button
+    mat-raised-button
+    [color]="timeStarted ? 'disabled' : 'primary'"
+    [disabled]="timeStarted"
+    (click)="startTimer()"
+  >
+    Zeit antragen</button
+  >&nbsp;
+  <button mat-raised-button color="primary" (click)="stopTimer()">
+    Zeit austragen
+  </button>
+  &nbsp;
+  <button mat-raised-button color="accent" (click)="totalTime()">
+    Total Time</button
+  >&nbsp;
+
+  <div style="margin-top: 2em">
+    <button mat-raised-button color="primary" (click)="addTime()">
+      Add Time
+    </button>
+    <ul>
+      <li *ngFor="let time of times">{{ time }}</li>
+    </ul>
+    <p>Total Hours: {{ totalHours }}</p>
+  </div>
+</div>
+
+<h1>{{ startTime | date : "dd.MM.yyyy HH:mm" }}</h1>
+<h1>{{ endTime | date : "dd.MM.yyyy HH:mm" }}</h1>
+<h1>{{ timeWorked }}</h1>

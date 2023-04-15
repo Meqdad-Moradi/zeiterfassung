@@ -18,38 +18,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private getTimeService: GetTimesService) {}
 
   ngOnInit(): void {
-    this.dateSubscription = this.getTimeService
-      .fetchTime()
-      .subscribe((data) => {
-        this.dataSource = new MatTableDataSource<any>(data);
-      });
+    // this.dateSubscription = this.getTimeService
+    //   .fetchTime()
+    //   .subscribe((data) => {
+    //     this.dataSource = new MatTableDataSource<any>(data);
+    //   });
 
     // this.todayTime = this.getTimeService.getTimeToday();
     // this.monthTime = this.getTimeService.getTimeThisMonth();
-  }
-
-  /**
-   * calculate time difference
-   * @param dateSent
-   * @returns date difference
-   */
-  calculateTimeDiff(dateSent: any) {
-    let currentDate = new Date();
-    dateSent = new Date(dateSent);
-
-    return Math.floor(
-      (Date.UTC(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        currentDate.getDate()
-      ) -
-        Date.UTC(
-          dateSent.getFullYear(),
-          dateSent.getMonth(),
-          dateSent.getDate()
-        )) /
-        (1000 * 60 * 60 * 24)
-    );
   }
 
   ngOnDestroy(): void {

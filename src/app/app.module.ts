@@ -16,9 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { DatePipe } from '@angular/common';
 import { ResultComponent } from './components/pages/result/result.component';
+import { ShowcaseComponent } from './components/pages/showcase/showcase.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, ResultComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, ResultComponent, ShowcaseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

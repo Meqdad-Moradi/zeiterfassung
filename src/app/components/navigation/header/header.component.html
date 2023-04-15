@@ -1,26 +1,11 @@
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> Zeiterfassung </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <!-- cta -->
-    <div class="cta">
-      <button
-        mat-raised-button
-        [color]="timeStarted ? 'disabled' : 'accent'"
-        [disabled]="timeStarted"
-        (click)="startTimer()"
-      >
-        Zeit antragen
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a class="logo" [routerLink]="''">Zeiterfassung</a>
+      <button class="login" mat-raised-button color="secondary">
+        Login &nbsp;
+        <mat-icon>login</mat-icon>
       </button>
-      <button mat-raised-button color="accent" (click)="stopTimer()">
-        Zeit austragen
-      </button>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<h1>{{ startTime | date : "EEEE hh:mm a" }}</h1>
-<h1>{{ endTime | date : "EEEE hh:mm a" }}</h1>
-<h1>{{ timeWorked / (1000 / 60 / 60) | date : "hh:mm:ss" }}</h1>
+    </nav>
+  </div>
+</header>

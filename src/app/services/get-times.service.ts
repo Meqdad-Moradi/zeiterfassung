@@ -1,40 +1,49 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetTimesService {
-  private timeWorkedToday = 0;
-  private timeWorkedThisMonth = 0;
+  private storageKey = 'times';
+  private times: string[] = [];
 
-  constructor(private http: HttpClient) {
-    this.timeWorkedToday =
-      parseInt(localStorage.getItem('timeWorkedToday')!) || 0;
-    this.timeWorkedThisMonth =
-      parseInt(localStorage.getItem('timeWorkedThisMonth')!) || 0;
+  constructor() {
+    this.loadTimesFromStorage();
   }
 
-  fetchTime(): Observable<any> {
-    return this.http.get('./assets/data.json');
+  private loadTimesFromStorage(): void {
+    const storedTimes = localStorage.getItem(this.storageKey);
+    if (storedTimes) {
+      this.times = JSON.parse(storedTimes);
+    }
   }
 
-  addTime(time: number): void {
-    this.timeWorkedToday += time;
-    this.timeWorkedThisMonth += time;
-    localStorage.setItem('timeWorkedToday', this.timeWorkedToday.toString());
-    localStorage.setItem(
-      'timeWorkedThisMonth',
-      this.timeWorkedThisMonth.toString()
-    );
+  private saveTimesToStorage(): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.times));
   }
 
-  getTimeToday(): number {
-    return this.timeWorkedToday;
+  public addCurrentTime(): void {
+    const now = new Date();
+    const time = `${now.getHours().toString().padStart(2, '0')}:${now
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}`;
+    this.times.push(time);
+    this.saveTimesToStorage();
   }
 
-  getTimeThisMonth(): number {
-    return this.timeWorkedThisMonth;
+  public getTimes(): string[] {
+    return this.times;
+  }
+
+  public getTotalHours(): number {
+    let totalHours = 0;
+    for (const time of this.times) {
+      const [hours, minutes] = time
+        .split(':')
+        .map((value) => parseInt(value, 10));
+      totalHours += hours + minutes / 60;
+    }
+    return totalHours;
   }
 }

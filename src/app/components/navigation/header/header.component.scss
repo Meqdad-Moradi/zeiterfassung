@@ -1,17 +1,28 @@
-.mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
-  margin-left: 8px;
-}
-
-.mat-expansion-panel {
+.header {
+  padding-block: 1em;
   background-color: var(--color-primary);
 
-  .cta {
+  .nav {
+    height: inherit;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
     gap: 2em;
+  }
+
+  a {
+    display: inline-block;
+    color: var(--color-neutral-100);
+  }
+
+  button {
+    color: var(--color-primary);
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
   }
 }

@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
 :root {
-  --color-primary: hsl(282, 68%, 38%);
-  --color-secondary: hsl(282, 60%, 46%);
+  --color-primary: hsl(231, 48%, 48%);
+  --color-secondary: hsl(231, 48%, 58%);
 
   --color-neutral-50: hsl(0, 0%, 100%);
   --color-neutral-100: hsl(210, 11%, 96%);
@@ -40,7 +42,8 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 1.7;
   color: var(--color-neutral-800);
 }
@@ -48,6 +51,16 @@ body {
 button,
 input {
   font-family: inherit;
+}
+
+img,
+picture {
+  width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
 }
 
 // utilities
