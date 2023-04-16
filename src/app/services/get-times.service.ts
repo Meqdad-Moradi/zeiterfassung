@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { ITimes } from '../modules/times';
+import { ITimes, ITotalHoursAndMins } from '../modules/times';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,9 @@ export class GetTimesService {
     this.loadTimesFromStorage();
   }
 
+  /**
+   * loadTimesFromStorage
+   */
   private loadTimesFromStorage(): void {
     const storedStartTimes = localStorage.getItem(this.startKey);
     const storedEndTimes = localStorage.getItem(this.endKey);
@@ -32,50 +35,64 @@ export class GetTimesService {
     }
   }
 
-  public addCurrentTime(): void {
-    const now = new Date();
+  /**
+   * addCurrentTime
+   */
+  addCurrentTime(): void {
+    const now = moment(new Date());
     this.startTimes.push(now);
     localStorage.setItem(this.startKey, JSON.stringify(this.startTimes));
   }
 
-  public addEndTime(): void {
-    const now = new Date();
+  /**
+   * addEndtime
+   */
+  addEndTime(): void {
+    const now = moment(new Date());
     this.endTimes.push(now);
     localStorage.setItem(this.endKey, JSON.stringify(this.endTimes));
   }
 
-  public getTimes(): ITimes {
-    const allTimes = { startTimes: this.startTimes, endTimes: this.endTimes };
-    return allTimes;
+  /**
+   *
+   * @returns getTimes
+   */
+  getTimes(): ITimes {
+    return { startTimes: this.startTimes, endTimes: this.endTimes };
   }
 
-  public getTotalHours(): any {
-    const totalStartTimes = this.startTimes.map((time) => {
-      const startTime = moment(time);
-      let totalHours = 0;
-      let totalMinutes = 0;
-  
-      this.endTimes.forEach((eTime) => {
-        const endTime = moment(eTime);
-  
-        const diffInMinutes = moment.duration(endTime.diff(startTime)).asMinutes();
-        totalHours += Math.floor(diffInMinutes / 60);
-        totalMinutes += Math.floor(diffInMinutes % 60);
-      });
-  
-      return { hours: totalHours, minutes: totalMinutes };
-    });
-  
-    return totalStartTimes;
+  /**
+   * getTotalHoursMinutes
+   * @param dates dates
+   * @returns sum of hours and minutes
+   */
+  getTotalHoursMinutes(): ITotalHoursAndMins {
+    const arr = this.startTimes
+      .map((date, index) => {
+        const endTime = this.endTimes[index];
+        if (!moment.isMoment(date) || !moment.isMoment(endTime)) {
+          console.log('undefined');
+          return null; // handle invalid dates
+        }
+        const duration = moment.duration(endTime.diff(date));
+        const hour = duration.asHours();
+        const mins = duration.asMinutes() % 60;
+        return { hour: Math.floor(hour), mins: Math.floor(mins) };
+      })
+      .filter((time) => time !== null); // filter out invalid dates
+
+    const total = arr.reduce<ITotalHoursAndMins>(
+      (acc, cur) => {
+        acc.hour += cur?.hour ?? 0;
+        acc.mins += cur?.mins ?? 0;
+        return acc;
+      },
+      { hour: 0, mins: 0 }
+    );
+
+    const totalHours = total.hour + Math.floor(total.mins / 60);
+    const totalMins = total.mins % 60;
+
+    return { hour: totalHours, mins: totalMins };
   }
-  
 }
-
-// const hours = now.getHours().toString().padStart(2, '0');
-// const minutes = now.getMinutes().toString().padStart(2, '0');
-// const time = `${hours}:${minutes}`;
-
-// return this.startTimes.reduce((totalHours, time) => {
-//   const [hours, minutes] = time.split(':').map(Number);
-//   return totalHours + hours + minutes / 60;
-// }, 0);
