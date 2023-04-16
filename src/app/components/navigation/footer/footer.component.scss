@@ -7,13 +7,10 @@ footer {
     place-items: center;
   }
 
-  h1 {
-    color: var(--color-neutral-200);
-    letter-spacing: 1px;
-  }
-
   p {
     color: var(--color-neutral-400);
+    font-size: 1.6rem;
+    margin-top: 1em;
   }
 
   small {

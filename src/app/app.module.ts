@@ -18,6 +18,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { ResultComponent } from './components/pages/result/result.component';
 import { ShowcaseComponent } from './components/pages/showcase/showcase.component';
 import localeDe from '@angular/common/locales/de';
+import { LoginComponent } from './components/pages/login/login.component';
 
 registerLocaleData(localeDe, 'de');
 
@@ -29,6 +30,7 @@ registerLocaleData(localeDe, 'de');
     HomeComponent,
     ResultComponent,
     ShowcaseComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

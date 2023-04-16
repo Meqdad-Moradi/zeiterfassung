@@ -1,0 +1,46 @@
+<section class="login">
+  <div class="container">
+    <div class="content">
+      <!-- img box -->
+      <div class="img-box">
+        <img
+          src="https://images.unsplash.com/photo-1510070112810-d4e9a46d9e91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGxvZ2lufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
+          alt="login"
+        />
+      </div>
+
+      <!-- form section -->
+      <div class="form-wrapper">
+        <h3 class="login-title">Schön, Sie wiederzusehen! 😄</h3>
+        <p class="sub-headline">
+          Geben Sie Ihre Anmeldedaten ein, um fortzufahren.
+        </p>
+        <form class="form">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" required />
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" required />
+          </mat-form-field>
+
+          <div class="form-links">
+            <a [routerLink]="'/password-forgot'">Password vergessen?</a>
+            <a [routerLink]="'/register'">Kein Konto noch?</a>
+          </div>
+
+          <button
+            class="form-btn"
+            type="button"
+            mat-raised-button
+            color="primary"
+          >
+            Login <mat-icon>login</mat-icon>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,8 +1,10 @@
 <header class="header">
   <div class="container">
     <nav class="nav">
-      <a class="logo" [routerLink]="''">Zeiterfassung</a>
-      <button class="login" mat-raised-button>
+      <a [routerLink]="''">
+        <h1 class="logo">Zeiterfassung</h1>
+      </a>
+      <button class="login" [routerLink]="'/login'" mat-raised-button>
         Login &nbsp;
         <mat-icon>login</mat-icon>
       </button>

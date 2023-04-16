@@ -24,16 +24,20 @@
     border-radius: 5px;
     box-shadow: var(--box-shadow);
 
-    .details-title {
-      margin-bottom: 1em;
-      color: var(--color-primary);
-    }
-
     .details-header {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
       justify-content: space-between;
       align-items: start;
       gap: 2em;
+
+      .details-title {
+        color: var(--color-primary);
+      }
+
+      .mat-form-field {
+        margin-left: auto;
+      }
     }
   }
 
@@ -50,6 +54,18 @@
       &:first-of-type {
         span {
           font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 50em) {
+  .showcase {
+    .details {
+      .details-header {
+        .mat-form-field {
+          margin-left: unset;
         }
       }
     }
