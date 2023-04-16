@@ -8,7 +8,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment.prod';
 import { MaterialModule } from 'src/material.module';
@@ -39,6 +39,7 @@ registerLocaleData(localeDe, 'de');
     AngularFirestoreModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
   ],
   providers: [{ provide: DatePipe }, { provide: LOCALE_ID, useValue: 'de-DE' }],
   bootstrap: [AppComponent],

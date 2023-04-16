@@ -28,6 +28,13 @@
       margin-bottom: 1em;
       color: var(--color-primary);
     }
+
+    .details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 2em;
+    }
   }
 
   article {

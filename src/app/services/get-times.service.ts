@@ -16,6 +16,13 @@ export class GetTimesService {
   }
 
   /**
+   * check if the austragen button is clicked
+   */
+  isTimeStoped(): boolean {
+    return this.endTimes.length === this.startTimes.length;
+  }
+
+  /**
    * loadTimesFromStorage
    */
   private loadTimesFromStorage(): void {
@@ -54,24 +61,22 @@ export class GetTimesService {
   }
 
   /**
-   *
-   * @returns getTimes
+   * getTimes
+   * @returns all times
    */
   getTimes(): ITimes {
     return { startTimes: this.startTimes, endTimes: this.endTimes };
   }
 
   /**
-   * getTotalHoursMinutes
-   * @param dates dates
-   * @returns sum of hours and minutes
+   *  getTotalHoursMinutes
+   * @returns total hours and mins
    */
   getTotalHoursMinutes(): ITotalHoursAndMins {
     const arr = this.startTimes
       .map((date, index) => {
         const endTime = this.endTimes[index];
         if (!moment.isMoment(date) || !moment.isMoment(endTime)) {
-          console.log('undefined');
           return null; // handle invalid dates
         }
         const duration = moment.duration(endTime.diff(date));
@@ -83,8 +88,10 @@ export class GetTimesService {
 
     const total = arr.reduce<ITotalHoursAndMins>(
       (acc, cur) => {
-        acc.hour += cur?.hour ?? 0;
-        acc.mins += cur?.mins ?? 0;
+        if (cur) {
+          acc.hour += cur?.hour ?? 0;
+          acc.mins += cur?.mins ?? 0;
+        }
         return acc;
       },
       { hour: 0, mins: 0 }

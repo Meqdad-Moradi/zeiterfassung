@@ -23,8 +23,25 @@
 
     <!-- details -->
     <div class="details">
-      <h3 class="details-title">Zeit eintragen Details</h3>
+      <div class="details-header">
+        <h3 class="details-title">Zeit eintragen Details</h3>
 
+        <!-- select the month -->
+        <mat-form-field appearance="outline">
+          <mat-label>Monat auswählen</mat-label>
+          <mat-select
+            [(ngModel)]="selectedMonth"
+            name="months"
+            [disableOptionCentering]="true"
+          >
+            <mat-option *ngFor="let monthName of months" [value]="monthName">
+              {{ monthName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- articles -->
       <article>
         <div>
           <div class="time-details">

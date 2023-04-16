@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ITimes } from 'src/app/modules/times';
+import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
 
 @Component({
@@ -8,16 +11,39 @@ import { GetTimesService } from 'src/app/services/get-times.service';
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
 })
-export class ShowcaseComponent implements OnInit {
+export class ShowcaseComponent implements OnInit, OnDestroy {
   times!: ITimes;
-  totalHours = 0;
   timeStarted: boolean = false;
+  months: string[] = [];
+  selectedMonth!: string;
 
-  constructor(private getTimesService: GetTimesService) {}
+  // subscription
+  monthSubscription!: Subscription;
+
+  constructor(
+    private getTimesService: GetTimesService,
+    private getMonthsService: GetMonthsService
+  ) {}
 
   ngOnInit(): void {
+    // get all times from get time service
     this.times = this.getTimesService.getTimes();
-    this.timeStarted = true;
+
+    // check if the times is started to work
+    const timeStoped = this.getTimesService.isTimeStoped();
+    if (timeStoped) this.timeStarted = true;
+
+    // manipulate the months for searching
+    const monthNum = moment().month().toString();
+    this.monthSubscription = this.getMonthsService
+      .fetchMonths()
+      .pipe(
+        tap((months) => {
+          this.months = months;
+          this.selectedMonth = months[monthNum];
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -37,17 +63,21 @@ export class ShowcaseComponent implements OnInit {
     this.timeStarted = !this.timeStarted;
   }
 
-  /**
-   * totalTime
-   */
-  totalTime(): void {
-    // extract start time and end time
-    const start = moment(JSON.parse(localStorage.getItem('startTime')!));
-    const end = moment(JSON.parse(localStorage.getItem('endTime')!));
+  // /**
+  //  * totalTime
+  //  */
+  // totalTime(): void {
+  //   // extract start time and end time
+  //   const start = moment(JSON.parse(localStorage.getItem('startTime')!));
+  //   const end = moment(JSON.parse(localStorage.getItem('endTime')!));
 
-    const hours = moment(end.diff(start, 'hours', true));
-    const minutes = moment(end.diff(start, 'minutes', true) % 60);
+  //   const hours = moment(end.diff(start, 'hours', true));
+  //   const minutes = moment(end.diff(start, 'minutes', true) % 60);
 
-    console.log(hours, minutes);
+  //   console.log(hours, minutes);
+  // }
+
+  ngOnDestroy(): void {
+    this.monthSubscription.unsubscribe();
   }
 }
