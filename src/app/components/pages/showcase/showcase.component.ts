@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ITimes } from 'src/app/modules/times';
+import { ITime } from 'src/app/modules/times';
 import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
 
@@ -12,9 +12,9 @@ import { GetTimesService } from 'src/app/services/get-times.service';
   styleUrls: ['./showcase.component.scss'],
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
-  times!: ITimes;
-  timeStarted: boolean = false;
+  times: ITime[] = [];
   months: string[] = [];
+  timeStarted: boolean = false;
   selectedMonth!: string;
 
   // subscription
@@ -29,18 +29,17 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     // get all times from get time service
     this.times = this.getTimesService.getTimes();
 
-    // check if the times is started to work
-    const timeStoped = this.getTimesService.isTimeStoped();
-    if (timeStoped) this.timeStarted = true;
+    // Check if the times have started
+    // this.timeStarted = this.getTimesService.isTimeStoped() === true;
 
-    // manipulate the months for searching
-    const monthNum = moment().month().toString();
+    // Set the selected month to the current month
+    const currentMonthNum = moment().month().toString();
     this.monthSubscription = this.getMonthsService
       .fetchMonths()
       .pipe(
         tap((months) => {
           this.months = months;
-          this.selectedMonth = months[monthNum];
+          this.selectedMonth = months[currentMonthNum];
         })
       )
       .subscribe();
@@ -50,7 +49,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
    * startTime
    */
   startTime(): void {
-    this.getTimesService.addCurrentTime();
+    this.getTimesService.addStartTime();
     this.times = this.getTimesService.getTimes();
     this.timeStarted = false;
   }
@@ -60,21 +59,19 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
    */
   endTime(): void {
     this.getTimesService.addEndTime();
+    this.times = this.getTimesService.getTimes();
     this.timeStarted = !this.timeStarted;
   }
 
-  // /**
-  //  * totalTime
-  //  */
-  // totalTime(): void {
-  //   // extract start time and end time
-  //   const start = moment(JSON.parse(localStorage.getItem('startTime')!));
-  //   const end = moment(JSON.parse(localStorage.getItem('endTime')!));
+  // calculateAllTimes(allTimes: any) {
+  //   const endTimesArr = allTimes.endTimes.map((item: string) => ({
+  //     endTime: item,
+  //   }));
+  //   const startTimesArr = allTimes.startTimes.map((item: string) => ({
+  //     startTime: item,
+  //   }));
 
-  //   const hours = moment(end.diff(start, 'hours', true));
-  //   const minutes = moment(end.diff(start, 'minutes', true) % 60);
-
-  //   console.log(hours, minutes);
+  //   this.allTimes = [...startTimesArr, ...endTimesArr];
   // }
 
   ngOnDestroy(): void {

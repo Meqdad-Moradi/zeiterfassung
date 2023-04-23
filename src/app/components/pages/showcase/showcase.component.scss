@@ -42,32 +42,10 @@
   }
 
   article {
-    display: flex;
-
     .time-details {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2em;
-      padding: 0.5em 0;
-      border-bottom: 1px solid var(--color-neutral-200);
-
-      &:first-of-type {
-        span {
-          font-weight: 600;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 50em) {
-  .showcase {
-    .details {
-      .details-header {
-        .mat-form-field {
-          margin-left: unset;
-        }
-      }
+      grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+      align-items: center;
     }
   }
 }

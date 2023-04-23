@@ -4,7 +4,7 @@
       <button
         mat-raised-button
         color="primary"
-        [disabled]="!timeStarted"
+        [disabled]="timeStarted"
         (click)="startTime()"
       >
         Eintragen
@@ -13,7 +13,7 @@
       <button
         mat-raised-button
         color="primary"
-        [disabled]="timeStarted"
+        [disabled]="!timeStarted"
         (click)="endTime()"
       >
         Austragen
@@ -43,22 +43,16 @@
 
       <!-- articles -->
       <article>
-        <div>
-          <div class="time-details">
-            <span>Datum</span>
-            <span>Von</span>
-          </div>
-          <div class="time-details" *ngFor="let date of times.startTimes">
-            <span>{{ date | date : "EE dd.MM.yyyy" }}</span>
-            <span>{{ date | date : "HH:mm" }}</span>
-          </div>
+        <div class="time-details">
+          <h5>Datum</h5>
+          <h5>Von</h5>
+          <h5>Bis</h5>
         </div>
 
-        <div>
-          <div class="time-details"><span>Bis</span></div>
-          <div class="time-details" *ngFor="let date of times.endTimes">
-            <span>{{ date | date : "HH:mm" }}</span>
-          </div>
+        <div class="time-details" *ngFor="let date of times">
+          <span>{{ date.startTime | date : "dd.MM.yyyy" }}</span
+          ><span>{{ date.startTime | date : "HH:mm" }}</span
+          ><span>{{ date.endTime | date : "HH:mm" }}</span>
         </div>
       </article>
     </div>

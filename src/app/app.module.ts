@@ -19,6 +19,8 @@ import { ResultComponent } from './components/pages/result/result.component';
 import { ShowcaseComponent } from './components/pages/showcase/showcase.component';
 import localeDe from '@angular/common/locales/de';
 import { LoginComponent } from './components/pages/login/login.component';
+import { DateAdapter } from '@angular/material/core';
+import { CustomeDateAdapter } from 'src/custome-date-adapter';
 
 registerLocaleData(localeDe, 'de');
 
@@ -43,7 +45,11 @@ registerLocaleData(localeDe, 'de');
     MaterialModule,
     FormsModule,
   ],
-  providers: [{ provide: DatePipe }, { provide: LOCALE_ID, useValue: 'de-DE' }],
+  providers: [
+    { provide: DatePipe },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: DateAdapter, useClass: CustomeDateAdapter },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

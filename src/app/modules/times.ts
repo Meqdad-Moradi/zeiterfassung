@@ -1,8 +1,7 @@
-export interface IStartTimes {}
-
-export interface ITimes {
-  startTimes: string[];
-  endTimes: string[];
+export interface ITime {
+  id: number;
+  startTime: string;
+  endTime: string;
 }
 
 export interface ITotalHoursAndMins {
