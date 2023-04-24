@@ -1,0 +1,14 @@
+<section class="result">
+  <div class="container">
+    <h3>Ergebnis</h3>
+    <div class="content">
+      <h4 *ngIf="totalTime">
+        Aktuell Stunden Stand:
+        {{ totalTime.hour + ":" + totalTime.mins }}
+      </h4>
+    </div>
+    <button mat-raised-button cdkFocusInitial (click)="closeDialog()">
+      Close
+    </button>
+  </div>
+</section>

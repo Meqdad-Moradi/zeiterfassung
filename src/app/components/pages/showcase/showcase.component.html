@@ -1,21 +1,11 @@
 <section class="showcase">
   <div class="container">
     <div class="cta">
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="timeStarted"
-        (click)="startTime()"
-      >
+      <button mat-raised-button color="primary" (click)="startTime()">
         Eintragen
         <mat-icon>schedule</mat-icon>
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!timeStarted"
-        (click)="endTime()"
-      >
+      <button mat-raised-button color="primary" (click)="endTime()">
         Austragen
         <mat-icon>lock_clock</mat-icon>
       </button>
@@ -33,8 +23,12 @@
             [(ngModel)]="selectedMonth"
             name="months"
             [disableOptionCentering]="true"
+            (valueChange)="filterTimes($event)"
           >
-            <mat-option *ngFor="let monthName of months" [value]="monthName">
+            <mat-option
+              *ngFor="let monthName of months; let i = index"
+              [value]="i"
+            >
               {{ monthName }}
             </mat-option>
           </mat-select>
@@ -42,17 +36,26 @@
       </div>
 
       <!-- articles -->
-      <article>
+      <article *ngIf="times">
         <div class="time-details">
           <h5>Datum</h5>
           <h5>Von</h5>
           <h5>Bis</h5>
+          <span></span>
         </div>
 
         <div class="time-details" *ngFor="let date of times">
-          <span>{{ date.startTime | date : "dd.MM.yyyy" }}</span
-          ><span>{{ date.startTime | date : "HH:mm" }}</span
-          ><span>{{ date.endTime | date : "HH:mm" }}</span>
+          <span>{{ date.startTime | date : "dd.MM.yyyy" }}</span>
+          <span>{{ date.startTime | date : "HH:mm" }}</span>
+          <span>{{ date.endTime | date : "HH:mm" }}</span>
+          <div class="cta">
+            <button class="edit" mat-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button class="delete" mat-button (click)="deleteTime(date.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
       </article>
     </div>

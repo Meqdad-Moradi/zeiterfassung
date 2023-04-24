@@ -46,6 +46,34 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
       align-items: center;
+      padding: 0.4em 5px;
+
+      &:nth-of-type(2n) {
+        background-color: var(--color-neutral-100);
+      }
+
+      .cta {
+        display: flex;
+        gap: 0.5em;
+        justify-self: end;
+
+        button {
+          background-color: transparent;
+
+          &.edit {
+            color: var(--color-primary);
+          }
+
+          &.delete {
+            color: var(--color-danger);
+          }
+        }
+
+        button .mat-icon {
+          scale: 0.8;
+          margin-left: 0.2em;
+        }
+      }
     }
   }
 }

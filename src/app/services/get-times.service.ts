@@ -1,24 +1,29 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { ITime, ITotalHoursAndMins } from '../modules/times';
+import { ITime, ITotalTimes } from '../modules/times';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetTimesService {
   private times: ITime[] = [];
-  private prevtime: string = '';
   private readonly storeKey = 'timeTracking';
 
+  /**
+   * constructor
+   */
   constructor() {
     this.loadTimesFromStorage();
   }
 
   /**
-   * check if the austragen button is clicked
+   * check if the stop tracking button is clicked
    */
   isTimeStoped(): boolean {
-    return this.times[this.times.length - 1].endTime === '';
+    const endTime =
+      this.times.length && this.times[this.times.length - 1].endTime;
+    return endTime ? true : false;
   }
 
   /**
@@ -35,11 +40,16 @@ export class GetTimesService {
    * addCurrentTime
    */
   addStartTime(): void {
-    const now = moment().format();
-    this.prevtime = now;
+    const now = moment();
     const id = Math.random() * 10000;
-    let timeData: ITime = { id, startTime: now, endTime: '' };
+    let timeData: ITime = {
+      id,
+      startTime: now.format(),
+      month: now.month(),
+      endTime: '',
+    };
     this.times.push(timeData);
+    localStorage.setItem('prevTime', JSON.stringify(now.format()));
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
 
@@ -48,9 +58,12 @@ export class GetTimesService {
    */
   addEndTime(): void {
     const now = moment().format();
+    const prevTime = JSON.parse(localStorage.getItem('prevTime')!);
+
     const startedTime: ITime = this.times.find(
-      (time) => time.startTime === this.prevtime
+      (time: ITime) => time.startTime === prevTime
     )!;
+
     startedTime && (startedTime.endTime = now);
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
@@ -64,35 +77,38 @@ export class GetTimesService {
   }
 
   /**
-   *  getTotalHoursMinutes
-   * @returns total hours and mins
+   * Returns total hours and minutes of stored times
+   * @returns hours and minutes
    */
-  getTotalHoursMinutes(): ITotalHoursAndMins {
-    const arr = this.times
-      .map((date: ITime, index) => {
-        // const endTime = this.endTimes[index];
+  getTotalHoursMinutes(): Observable<ITotalTimes> {
+    // Retrieve stored times from local storage
+    const storedTimes = JSON.parse(localStorage.getItem(this.storeKey)!);
 
+    // Calculate hours and minutes for each stored time
+    const arr = storedTimes
+      .filter((item: ITime) => item.endTime !== '' && item.startTime !== '')
+      .map((date: ITime) => {
+        // Convert start and end times to moment objects
         const startTime = moment(date.startTime);
         const endTime = moment(date.endTime);
 
-        if (!moment.isMoment(date) || !moment.isMoment(endTime)) {
-          return null; // handle invalid dates
+        // Handle invalid dates
+        if (!moment.isMoment(startTime) || !moment.isMoment(endTime)) {
+          return;
         }
 
-        const duration = moment.duration(endTime.diff(startTime));
+        // Calculate hours and minutes for current time
+        const hour = endTime.diff(startTime, 'hours');
+        const mins = endTime.diff(startTime, 'minutes') % 60;
 
-        const hour = duration.asHours();
-        const mins = duration.asMinutes() % 60;
+        return { hour, mins };
+      });
 
-        console.log({ hour: Math.floor(hour), mins: Math.floor(mins) });
-
-        return { hour: Math.floor(hour), mins: Math.floor(mins) };
-      })
-      .filter((time) => time !== null); // filter out invalid dates
-
-    const total = arr.reduce<ITotalHoursAndMins>(
-      (acc, cur) => {
+    // Calculate total hours and minutes by reducing the array of stored times
+    const total = arr.reduce(
+      (acc: any, cur: any) => {
         if (cur) {
+          // Add hours and minutes of current time to accumulator
           acc.hour += cur?.hour ?? 0;
           acc.mins += cur?.mins ?? 0;
         }
@@ -101,9 +117,22 @@ export class GetTimesService {
       { hour: 0, mins: 0 }
     );
 
+    // Convert total minutes to hours and minutes
     const totalHours = total.hour + Math.floor(total.mins / 60);
     const totalMins = total.mins % 60;
 
-    return { hour: totalHours, mins: totalMins };
+    // Return total hours and minutes as an object
+    return of({ hour: totalHours, mins: totalMins });
+  }
+
+  /**
+   * delete time
+   * @param time
+   */
+  deleteTime(id: number): void {
+    const storedAllTimes = JSON.parse(localStorage.getItem(this.storeKey)!);
+    const newTimes = storedAllTimes.filter((date: ITime) => date.id !== id);
+    this.times = newTimes;
+    localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
 }

@@ -4,6 +4,9 @@
       <a [routerLink]="''">
         <h1 class="logo">Zeiterfassung</h1>
       </a>
+      <button class="result-btn" mat-button (click)="showTotalTime()">
+        Zeit Ergebnis
+      </button>
       <button class="login" [routerLink]="'/login'" mat-raised-button>
         Login &nbsp;
         <mat-icon>login</mat-icon>

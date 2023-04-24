@@ -1,10 +1,11 @@
 export interface ITime {
   id: number;
+  month: number;
   startTime: string;
   endTime: string;
 }
 
-export interface ITotalHoursAndMins {
+export interface ITotalTimes {
   hour: number;
   mins: number;
 }

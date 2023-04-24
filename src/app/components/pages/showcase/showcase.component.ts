@@ -26,23 +26,26 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // get all times from get time service
-    this.times = this.getTimesService.getTimes();
-
     // Check if the times have started
-    // this.timeStarted = this.getTimesService.isTimeStoped() === true;
+    this.timeStarted = this.getTimesService.isTimeStoped() === true;
 
     // Set the selected month to the current month
-    const currentMonthNum = moment().month().toString();
+    const currentMonth = moment().month();
     this.monthSubscription = this.getMonthsService
       .fetchMonths()
       .pipe(
         tap((months) => {
           this.months = months;
-          this.selectedMonth = months[currentMonthNum];
+          this.selectedMonth = months[currentMonth];
+          this.filterTimes(currentMonth);
         })
       )
       .subscribe();
+  }
+
+  filterTimes(month: number): void {
+    const allTimes = this.getTimesService.getTimes();
+    this.times = allTimes.filter((date) => date.month === month);
   }
 
   /**
@@ -51,7 +54,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   startTime(): void {
     this.getTimesService.addStartTime();
     this.times = this.getTimesService.getTimes();
-    this.timeStarted = false;
+    this.timeStarted = true;
   }
 
   /**
@@ -63,16 +66,13 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.timeStarted = !this.timeStarted;
   }
 
-  // calculateAllTimes(allTimes: any) {
-  //   const endTimesArr = allTimes.endTimes.map((item: string) => ({
-  //     endTime: item,
-  //   }));
-  //   const startTimesArr = allTimes.startTimes.map((item: string) => ({
-  //     startTime: item,
-  //   }));
-
-  //   this.allTimes = [...startTimesArr, ...endTimesArr];
-  // }
+  /**
+   * delete time
+   * @param time
+   */
+  deleteTime(id: number): void {
+    this.getTimesService.deleteTime(id);
+  }
 
   ngOnDestroy(): void {
     this.monthSubscription.unsubscribe();

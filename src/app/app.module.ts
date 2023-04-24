@@ -15,12 +15,13 @@ import { MaterialModule } from 'src/material.module';
 import { FooterComponent } from './components/navigation/footer/footer.component';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { ResultComponent } from './components/pages/result/result.component';
+import { ResultComponent } from './components/dialogs/result/result.component';
 import { ShowcaseComponent } from './components/pages/showcase/showcase.component';
 import localeDe from '@angular/common/locales/de';
 import { LoginComponent } from './components/pages/login/login.component';
 import { DateAdapter } from '@angular/material/core';
 import { CustomeDateAdapter } from 'src/custome-date-adapter';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 registerLocaleData(localeDe, 'de');
 
@@ -49,6 +50,8 @@ registerLocaleData(localeDe, 'de');
     { provide: DatePipe },
     { provide: LOCALE_ID, useValue: 'de-DE' },
     { provide: DateAdapter, useClass: CustomeDateAdapter },
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
   ],
   bootstrap: [AppComponent],
 })
