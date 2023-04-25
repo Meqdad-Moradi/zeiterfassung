@@ -4,7 +4,11 @@
     <div class="content">
       <h4 *ngIf="data | async as totalTime">
         Aktuell Stunden Stand:
-        {{ totalTime.hour + ":" + totalTime.mins }}
+        {{
+          totalTime.hour.toString().padStart(2, "0") +
+            ":" +
+            totalTime.mins.toString().padStart(2, "0")
+        }}
       </h4>
     </div>
     <button
