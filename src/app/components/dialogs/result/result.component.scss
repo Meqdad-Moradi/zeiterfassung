@@ -1,6 +1,7 @@
 .result {
   padding-block: 3em;
   background-color: var(--color-neutral-100);
+  text-align: center;
 
   h3 {
     color: var(--color-primary);
@@ -10,12 +11,11 @@
   .content {
     display: grid;
     gap: 0.5em;
+    margin-bottom: 2em;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: space-between;
-    gap: 1em;
+  .close-btn {
+    background-color: var(--color-primary);
+    color: var(--color-neutral-50);
   }
 }
