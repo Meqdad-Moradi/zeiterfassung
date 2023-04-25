@@ -2,12 +2,17 @@
   <div class="container">
     <h3>Ergebnis</h3>
     <div class="content">
-      <h4 *ngIf="totalTime">
+      <h4 *ngIf="data | async as totalTime">
         Aktuell Stunden Stand:
         {{ totalTime.hour + ":" + totalTime.mins }}
       </h4>
     </div>
-    <button class="close-btn" mat-raised-button cdkFocusInitial (click)="closeDialog()">
+    <button
+      class="close-btn"
+      mat-raised-button
+      cdkFocusInitial
+      (click)="closeDialog()"
+    >
       Close
     </button>
   </div>
