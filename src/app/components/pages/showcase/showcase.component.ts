@@ -72,6 +72,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
    */
   deleteTime(id: number): void {
     this.getTimesService.deleteTime(id);
+    this.times = JSON.parse(localStorage.getItem('timeTracking')!);
   }
 
   ngOnDestroy(): void {

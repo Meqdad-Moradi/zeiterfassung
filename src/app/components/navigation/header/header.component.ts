@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { ITotalTimes } from 'src/app/modules/times';
 import { GetTimesService } from 'src/app/services/get-times.service';
 import { ResultComponent } from '../../dialogs/result/result.component';
@@ -11,7 +11,8 @@ import { ResultComponent } from '../../dialogs/result/result.component';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  totalTime!: ITotalTimes;
+  totalTime!: Observable<ITotalTimes>;
+  readResult = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dialog: MatDialog,
@@ -19,15 +20,16 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getTimesService
-      .getTotalHoursMinutes()
-      .pipe(tap((data) => (this.totalTime = data)))
-      .subscribe();
+    this.totalTime = this.readResult.pipe(
+      switchMap(() => this.getTimesService.getTotalHoursMinutes())
+    );
   }
 
   showTotalTime(): void {
     this.dialog.open(ResultComponent, {
       data: this.totalTime,
     });
+
+    this.readResult.next(true);
   }
 }

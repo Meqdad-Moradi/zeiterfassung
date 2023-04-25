@@ -130,9 +130,8 @@ export class GetTimesService {
    * @param time
    */
   deleteTime(id: number): void {
-    const storedAllTimes = JSON.parse(localStorage.getItem(this.storeKey)!);
-    const newTimes = storedAllTimes.filter((date: ITime) => date.id !== id);
-    this.times = newTimes;
+    const filterTimes = this.times.filter((date: ITime) => date.id !== id);
+    this.times = filterTimes;
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
 }
