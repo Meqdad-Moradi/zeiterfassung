@@ -31,10 +31,6 @@
       align-items: start;
       gap: 2em;
 
-      .details-title {
-        color: var(--color-primary);
-      }
-
       .mat-form-field {
         margin-left: auto;
       }
@@ -47,6 +43,10 @@
       grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
       align-items: center;
       padding: 0.4em 5px;
+
+      h5 {
+        color: var(--color-primary);
+      }
 
       &:nth-of-type(2n) {
         background-color: var(--color-neutral-100);
