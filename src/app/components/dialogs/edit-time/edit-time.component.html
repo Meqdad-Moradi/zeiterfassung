@@ -1,0 +1,32 @@
+<section class="edit-time">
+  <h1>Zeit bearbeiten</h1>
+
+  <div class="form-control" appearance="outline">
+    <input
+      [(ngModel)]="startTime"
+      type="time"
+      id="startTime"
+      placeholder="time"
+    />
+    <label for="startTime">Start</label>
+  </div>
+
+  <div class="form-control" appearance="outline">
+    <input [(ngModel)]="endTime" type="time" id="endTime" placeholder="time" />
+    <label for="endTime">Ende</label>
+  </div>
+
+  <div class="cta">
+    <button class="close-btn" mat-raised-button (click)="closeDialog()">
+      Abbrechen
+    </button>
+    <button
+      class="save-btn"
+      mat-raised-button
+      [mat-dialog-close]="{ id, startTime, endTime }"
+      cdkFocusInitial
+    >
+      Speichern
+    </button>
+  </div>
+</section>

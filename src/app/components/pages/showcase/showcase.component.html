@@ -49,7 +49,7 @@
           <span>{{ date.startTime | date : "HH:mm" }}</span>
           <span>{{ date.endTime | date : "HH:mm" }}</span>
           <div class="cta">
-            <button class="edit" mat-button>
+            <button class="edit" mat-button (click)="editTime(date.id)">
               <mat-icon>edit</mat-icon>
             </button>
             <button class="delete" mat-button (click)="deleteTime(date.id)">

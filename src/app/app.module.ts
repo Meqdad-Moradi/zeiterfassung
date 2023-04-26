@@ -22,6 +22,11 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { DateAdapter } from '@angular/material/core';
 import { CustomeDateAdapter } from 'src/custome-date-adapter';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+<<<<<<< HEAD
+import { EditTimeComponent } from './components/dialogs/edit-time/edit-time.component';
+=======
+import { BannerComponent } from './components/pages/banner/banner.component';
+>>>>>>> banner
 
 registerLocaleData(localeDe, 'de');
 
@@ -34,6 +39,11 @@ registerLocaleData(localeDe, 'de');
     ResultComponent,
     ShowcaseComponent,
     LoginComponent,
+<<<<<<< HEAD
+    EditTimeComponent,
+=======
+    BannerComponent,
+>>>>>>> banner
   ],
   imports: [
     BrowserModule,
