@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { findIndex, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ITime } from 'src/app/modules/times';
 import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
