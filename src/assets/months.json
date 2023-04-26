@@ -1,14 +1,14 @@
 [
-  "Januar ",
-  "Februar ",
-  "März ",
-  "April ",
-  "Mai ",
-  "Juni ",
-  "Juli ",
-  "August ",
-  "September ",
-  "Oktober ",
-  "November ",
-  "Dezember "
+  { "id": 0, "month": "Januar " },
+  { "id": 1, "month": "Februar " },
+  { "id": 2, "month": "März " },
+  { "id": 3, "month": "April " },
+  { "id": 4, "month": "Mai " },
+  { "id": 5, "month": "Juni " },
+  { "id": 6, "month": "Juli " },
+  { "id": 7, "month": "August " },
+  { "id": 8, "month": "September " },
+  { "id": 9, "month": "Oktober " },
+  { "id": 10, "month": "November " },
+  { "id": 12, "month": "Dezember " }
 ]

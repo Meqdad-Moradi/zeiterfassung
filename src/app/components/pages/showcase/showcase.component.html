@@ -27,9 +27,9 @@
           >
             <mat-option
               *ngFor="let monthName of months; let i = index"
-              [value]="i"
+              [value]="monthName.id"
             >
-              {{ monthName }}
+              {{ monthName.month }}
             </mat-option>
           </mat-select>
         </mat-form-field>

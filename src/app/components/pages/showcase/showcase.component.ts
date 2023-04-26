@@ -7,6 +7,7 @@ import { ITime } from 'src/app/modules/times';
 import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
 import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
+import { IMonth } from 'src/app/modules/month';
 
 @Component({
   selector: 'app-showcase',
@@ -15,7 +16,7 @@ import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
   times: ITime[] = [];
-  months: string[] = [];
+  months: IMonth[] = [];
   timeStarted: boolean = false;
   selectedMonth!: string;
 
@@ -39,7 +40,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       .pipe(
         tap((months) => {
           this.months = months;
-          this.selectedMonth = months[currentMonth];
+          this.selectedMonth = months[currentMonth].id;
           this.filterTimes(currentMonth);
         })
       )
