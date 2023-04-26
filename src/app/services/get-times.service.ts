@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 })
 export class GetTimesService {
   private times: ITime[] = [];
-  private readonly storeKey = 'timeTracking';
+  public readonly storeKey = 'timeTracking';
 
   /**
    * constructor
