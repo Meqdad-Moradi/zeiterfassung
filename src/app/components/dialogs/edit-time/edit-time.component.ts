@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ITime } from 'src/app/modules/times';
+import { ToasterComponent } from '../toaster/toaster.component';
 
 @Component({
   selector: 'app-edit-time',
@@ -14,7 +16,8 @@ export class EditTimeComponent implements OnInit {
 
   constructor(
     private matDialogRef: MatDialogRef<EditTimeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -29,5 +32,15 @@ export class EditTimeComponent implements OnInit {
   // just close the dialog
   closeDialog(): void {
     this.matDialogRef.close();
+  }
+
+  // save dialog
+  saveDialog() {
+    this.snackBar.openFromComponent(ToasterComponent, {
+      data: 'Zeit wurde erfolgreich gespeichert!',
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 2500,
+    });
   }
 }

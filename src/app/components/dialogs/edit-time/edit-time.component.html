@@ -25,6 +25,7 @@
       mat-raised-button
       [mat-dialog-close]="{ id, startTime, endTime }"
       cdkFocusInitial
+      (click)="saveDialog()"
     >
       Speichern
     </button>
