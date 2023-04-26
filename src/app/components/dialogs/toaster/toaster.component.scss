@@ -1,0 +1,27 @@
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  color: var(--color-neutral-800);
+
+  .mat-icon {
+    scale: 0.8;
+    color: var(--color-succed);
+  }
+}
+
+::ng-deep {
+  .mat-snack-bar-container {
+    background-color: var(--color-neutral-100);
+    scale: 0.9;
+  }
+}
+
+@media (max-width: 50em) {
+  ::ng-deep {
+    .mat-snack-bar-container {
+      scale: 0.7;
+    }
+  }
+}

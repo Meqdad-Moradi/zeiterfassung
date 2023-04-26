@@ -24,6 +24,8 @@ import { CustomeDateAdapter } from 'src/custome-date-adapter';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EditTimeComponent } from './components/dialogs/edit-time/edit-time.component';
 import { BannerComponent } from './components/pages/banner/banner.component';
+import { ToasterComponent } from './components/dialogs/toaster/toaster.component';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 registerLocaleData(localeDe, 'de');
 
@@ -38,6 +40,7 @@ registerLocaleData(localeDe, 'de');
     LoginComponent,
     EditTimeComponent,
     BannerComponent,
+    ToasterComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ registerLocaleData(localeDe, 'de');
     { provide: DateAdapter, useClass: CustomeDateAdapter },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MAT_SNACK_BAR_DATA, useValue: {} },
   ],
   bootstrap: [AppComponent],
 })
