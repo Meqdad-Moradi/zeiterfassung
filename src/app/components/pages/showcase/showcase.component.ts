@@ -80,32 +80,49 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * edit time
+   * @param id time id
+   */
   editTime(id: number): void {
-    const allTimes = JSON.parse(
-      localStorage.getItem(this.getTimesService.storeKey)!
-    );
-    const currentTime = allTimes.filter((item: ITime) => item.id === id);
+    // find the current time to update
+    const currentTime = this.times.filter((item: ITime) => item.id === id);
 
+    // open dialog and pass times to update
     const dialogRef = this.dialog.open(EditTimeComponent, {
       data: currentTime,
     });
 
+    // recive new updated times from dialog
     dialogRef.afterClosed().subscribe((newTime) => {
       if (!newTime && newTime === undefined) return;
 
+      // return if times array is empty
       if (this.times.length) {
-        const updateTime = this.times.find((item) => item.id === newTime.id);
+        const time: ITime = this.times.find((item) => item.id === newTime.id)!;
 
-        const currentStartTime = updateTime?.startTime
-          .split('T')[1]
-          .slice(0, 5);
-        const currentEndTime = updateTime?.endTime.split('T')[1].slice(0, 5);
+        // find old start & end times
+        const currentStartTime = time?.startTime.split('T')[1].slice(0, 5);
+        const currentEndTime = time?.endTime.split('T')[1].slice(0, 5);
 
-        updateTime &&
-          updateTime.startTime.replace(currentStartTime!, newTime.startTime);
-        updateTime &&
-          updateTime.endTime.replace(currentEndTime!, newTime.endTime);
+        // replace old with new times
+        const updatedStartTime =
+          time && time.startTime.replace(currentStartTime!, newTime.startTime);
+        const updatedEndTime =
+          time && time.endTime.replace(currentEndTime!, newTime.endTime);
 
+        // create a new object from new times
+        const updatedTime = {
+          ...time,
+          startTime: updatedStartTime,
+          endTime: updatedEndTime,
+        };
+
+        // update the times array with new value (start and new times)
+        const findIndex = this.times.indexOf(time);
+        this.times[findIndex] = updatedTime;
+
+        // store again new times array in to local storage
         localStorage.setItem(
           this.getTimesService.storeKey,
           JSON.stringify(this.times)
