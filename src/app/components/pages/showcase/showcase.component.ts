@@ -20,7 +20,6 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   months: IMonth[] = [];
   timeStarted: boolean = false;
   selectedMonth!: string;
-  isDeleting: boolean = false;
 
   // subscription
   monthSubscription!: Subscription;
