@@ -37,10 +37,10 @@ export class EditTimeComponent implements OnInit {
   // save dialog
   saveDialog() {
     this.snackBar.openFromComponent(ToasterComponent, {
-      data: 'Zeit wurde erfolgreich gespeichert!',
+      data: 'Die Zeit wurde erfolgreich gespeichert!',
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      duration: 2500,
+      duration: 3000,
     });
   }
 }
