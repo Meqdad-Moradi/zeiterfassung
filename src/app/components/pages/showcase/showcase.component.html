@@ -1,20 +1,9 @@
 <section class="showcase">
   <div class="container">
-    <div class="cta">
-      <button mat-raised-button color="primary" (click)="startTime()">
-        Eintragen
-        <mat-icon>schedule</mat-icon>
-      </button>
-      <button mat-raised-button color="primary" (click)="endTime()">
-        Austragen
-        <mat-icon>lock_clock</mat-icon>
-      </button>
-    </div>
-
     <!-- details -->
-    <div class="details">
+    <div class="details" *ngIf="times.length; else onEmpty">
       <div class="details-header">
-        <h3 class="details-title">Zeit eintragen Details</h3>
+        <h3 class="details-title">Zeit eingetragen Details</h3>
 
         <!-- select the month -->
         <mat-form-field appearance="outline">
@@ -36,7 +25,7 @@
       </div>
 
       <!-- articles -->
-      <article *ngIf="times">
+      <article>
         <div class="time-details">
           <h5>Datum</h5>
           <h5>Von</h5>
@@ -61,3 +50,11 @@
     </div>
   </div>
 </section>
+
+<!-- if the details table is empty -->
+<ng-template #onEmpty>
+  <section class="showcase-empty">
+    <h3 class="details-title">Zeit eingetragen Details</h3>
+    <p>Sie haben noch kein Zeit eingetragen.</p>
+  </section>
+</ng-template>

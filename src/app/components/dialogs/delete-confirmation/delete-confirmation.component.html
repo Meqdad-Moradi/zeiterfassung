@@ -1,0 +1,26 @@
+<section class="delete-section">
+  <div class="icon-box">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <h1 color="warn">Sind Sie sicher?</h1>
+
+  <p>
+    Möchten Sie diesen Datensatz wirklich löschen? Dieser Vorgang kann nicht
+    rückgängig gemacht werden!
+  </p>
+
+  <div class="cta">
+    <button class="close-btn" mat-raised-button (click)="closeDialog()">
+      Abbrechen
+    </button>
+    <button
+      class="confirm-btn"
+      mat-raised-button
+      color="warn"
+      [mat-dialog-close]="true"
+    >
+      Löschen
+    </button>
+  </div>
+</section>

@@ -6,5 +6,16 @@
       Kontrolle über Ihre Arbeitszeit. Wir helfen Ihnen dabei, produktiver zu
       sein und Ihre Ziele zu erreichen.
     </p>
+
+    <div class="cta">
+      <button mat-raised-button color="primary" (click)="startTime()">
+        Eintragen
+        <mat-icon>schedule</mat-icon>
+      </button>
+      <button class="stop-btn" mat-raised-button (click)="stopTime()">
+        Austragen
+        <mat-icon>lock_clock</mat-icon>
+      </button>
+    </div>
   </div>
 </section>

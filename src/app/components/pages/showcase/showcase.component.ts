@@ -8,6 +8,7 @@ import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
 import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
 import { IMonth } from 'src/app/modules/month';
+import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-showcase',
@@ -19,6 +20,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   months: IMonth[] = [];
   timeStarted: boolean = false;
   selectedMonth!: string;
+  isDeleting: boolean = false;
 
   // subscription
   monthSubscription!: Subscription;
@@ -45,8 +47,22 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
+    // trigger the starTime function
+    this.getTimesService.startTrackingTime.subscribe(() => {
+      this.startTime();
+    });
+
+    // trigger the endTime function
+    this.getTimesService.stopTrackingTime.subscribe(() => {
+      this.endTime();
+    });
   }
 
+  /**
+   * initial and filter times for selected month
+   * @param month
+   */
   filterTimes(month: number): void {
     const allTimes = this.getTimesService.getTimes();
     this.times = allTimes.filter((date) => date.month === month);
@@ -75,10 +91,22 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
    * @param time
    */
   deleteTime(id: number): void {
-    this.getTimesService.deleteTime(id);
-    this.times = JSON.parse(
-      localStorage.getItem(this.getTimesService.storeKey)!
-    );
+    // open confirm dialog
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((value) => {
+      // if value is false don't delete the rocord
+      if (!value) return;
+
+      // delete a record
+      this.getTimesService.deleteTime(id);
+      this.times = JSON.parse(
+        localStorage.getItem(this.getTimesService.storeKey)!
+      );
+    });
   }
 
   /**
@@ -92,6 +120,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     // open dialog and pass times to update
     const dialogRef = this.dialog.open(EditTimeComponent, {
       data: currentTime,
+      restoreFocus: false,
     });
 
     // recive new updated times from dialog

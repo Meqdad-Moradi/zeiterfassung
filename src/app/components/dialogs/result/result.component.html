@@ -3,7 +3,7 @@
     <h3>Ergebnis</h3>
     <div class="content">
       <h4 *ngIf="data | async as totalTime">
-        Aktuell Stunden Stand:
+        Aktuell Stundenstand:
         {{
           totalTime.hour.toString().padStart(2, "0") +
             ":" +
@@ -17,7 +17,7 @@
       cdkFocusInitial
       (click)="closeDialog()"
     >
-      Close
+      Schließen
     </button>
   </div>
 </section>

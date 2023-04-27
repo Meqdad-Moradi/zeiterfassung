@@ -1,11 +1,14 @@
 .result {
   padding-block: 3em;
-  background-color: var(--color-neutral-100);
   text-align: center;
 
   h3 {
     color: var(--color-primary);
     margin-bottom: 1em;
+  }
+
+  h4 {
+    line-height: 2;
   }
 
   .content {
