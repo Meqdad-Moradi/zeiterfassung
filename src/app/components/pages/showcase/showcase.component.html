@@ -1,7 +1,7 @@
 <section class="showcase">
   <div class="container">
     <!-- details -->
-    <div class="details" *ngIf="times.length; else onEmpty">
+    <div class="details">
       <div class="details-header">
         <h3 class="details-title">Zeit eingetragen Details</h3>
 
@@ -25,7 +25,7 @@
       </div>
 
       <!-- articles -->
-      <article>
+      <article *ngIf="times.length; else onEmpty">
         <div class="time-details">
           <h5>Datum</h5>
           <h5>Von</h5>
@@ -38,10 +38,20 @@
           <span>{{ date.startTime | date : "HH:mm" }}</span>
           <span>{{ date.endTime | date : "HH:mm" }}</span>
           <div class="cta">
-            <button class="edit" mat-button (click)="editTime(date.id)">
+            <button
+              class="edit"
+              mat-button
+              (click)="editTime(date.id)"
+              matTooltip="Zeit bearbeiten"
+            >
               <mat-icon>edit</mat-icon>
             </button>
-            <button class="delete" mat-button (click)="deleteTime(date.id)">
+            <button
+              class="delete"
+              mat-button
+              (click)="deleteTime(date.id)"
+              matTooltip="Löschen"
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -54,7 +64,6 @@
 <!-- if the details table is empty -->
 <ng-template #onEmpty>
   <section class="showcase-empty">
-    <h3 class="details-title">Zeit eingetragen Details</h3>
-    <p>Sie haben noch kein Zeit eingetragen.</p>
+    <p>Sie haben noch keine Zeit eingetragen.</p>
   </section>
 </ng-template>
