@@ -26,6 +26,7 @@ import { EditTimeComponent } from './components/dialogs/edit-time/edit-time.comp
 import { BannerComponent } from './components/pages/banner/banner.component';
 import { ToasterComponent } from './components/dialogs/toaster/toaster.component';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { DeleteConfirmationComponent } from './components/dialogs/delete-confirmation/delete-confirmation.component';
 
 registerLocaleData(localeDe, 'de');
 
@@ -41,6 +42,7 @@ registerLocaleData(localeDe, 'de');
     EditTimeComponent,
     BannerComponent,
     ToasterComponent,
+    DeleteConfirmationComponent,
   ],
   imports: [
     BrowserModule,

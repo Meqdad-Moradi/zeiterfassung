@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { ITime, ITotalTimes } from '../modules/times';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,17 @@ import { Observable, of } from 'rxjs';
 export class GetTimesService {
   private times: ITime[] = [];
   public readonly storeKey = 'timeTracking';
+
+  private startTackingTimeSubject = new Subject<boolean>();
+  private stopTackingTimeSubject = new Subject<boolean>();
+
+  get startTrackingTime() {
+    return this.startTackingTimeSubject;
+  }
+
+  get stopTrackingTime() {
+    return this.stopTackingTimeSubject;
+  }
 
   /**
    * constructor
