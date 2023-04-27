@@ -1,9 +1,9 @@
 .banner {
-  min-height: 60vh;
+  min-height: 70vh;
   padding-block: 4em;
   background-color: var(--color-neutral-100);
-  background: url("https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=1600")
-    no-repeat center / cover;
+  background: url("../../../../assets/images/watch.jpg") no-repeat center /
+    cover;
   position: relative;
   isolation: isolate;
 
@@ -16,7 +16,7 @@
     content: "";
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     inset: 0;
     z-index: -1;

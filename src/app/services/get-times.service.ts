@@ -51,6 +51,13 @@ export class GetTimesService {
    * addCurrentTime
    */
   addStartTime(): void {
+    // don't add start time if the time is not stoped
+    const isEndTimeEmpty =
+      this.times.length && this.times[this.times.length - 1].endTime === '';
+    console.log(isEndTimeEmpty);
+    if (isEndTimeEmpty) return;
+
+    // add current date
     const now = moment();
     const id = Math.random() * 10000;
     let timeData: ITime = {
