@@ -15,7 +15,7 @@
             (valueChange)="filterTimes($event)"
           >
             <mat-option
-              *ngFor="let monthName of months; let i = index"
+              *ngFor="let monthName of months;"
               [value]="monthName.id"
             >
               {{ monthName.month }}
