@@ -1,58 +1,53 @@
 <section class="showcase">
   <div class="container">
     <!-- details -->
-    <div class="details">
-      <div class="details-header">
-        <h3 class="details-title">Zeit eingetragen Details</h3>
-
-        <!-- select the month -->
-        <mat-form-field appearance="outline">
-          <mat-label>Monat auswählen</mat-label>
-          <mat-select
-            [(ngModel)]="selectedMonth"
-            name="months"
-            [disableOptionCentering]="true"
-            (valueChange)="filterTimes($event)"
-          >
-            <mat-option
-              *ngFor="let monthName of months;"
-              [value]="monthName.id"
-            >
-              {{ monthName.month }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <div class="details" *ngIf="times.length; else onEmpty">
+      <h3 class="details-title gradient">Zeit eingetragen Details</h3>
 
       <!-- articles -->
       <article *ngIf="times.length; else onEmpty">
         <div class="time-details">
-          <h5>Datum</h5>
+          <h5 class="truncate">Datum</h5>
           <h5>Von</h5>
           <h5>Bis</h5>
-          <span></span>
+
+          <!-- select the month -->
+          <mat-form-field appearance="standard">
+            <!-- <mat-label>Monat auswählen</mat-label> -->
+            <mat-select
+              (valueChange)="filterTimes($event)"
+              [value]="selectedMonth"
+              [disableOptionCentering]="true"
+            >
+              <mat-option
+                class="truncate"
+                *ngFor="let monthName of months; let i = index"
+                [value]="monthName.id"
+              >
+                {{ monthName.month }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <div class="time-details" *ngFor="let date of times">
-          <span>{{ date.startTime | date : "dd.MM.yyyy" }}</span>
+          <span class="truncate">{{
+            date.startTime | date : "dd.MM.yyyy"
+          }}</span>
           <span>{{ date.startTime | date : "HH:mm" }}</span>
           <span>{{ date.endTime | date : "HH:mm" }}</span>
           <div class="cta">
+            <!-- delete button -->
             <button
-              class="edit"
-              mat-button
-              (click)="editTime(date.id)"
-              matTooltip="Zeit bearbeiten"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              class="delete"
+              class="btn delete-btn"
               mat-button
               (click)="deleteTime(date.id)"
-              matTooltip="Löschen"
             >
-              <mat-icon>delete</mat-icon>
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+            <!-- edit button -->
+            <button class="btn edit-btn" mat-button (click)="editTime(date.id)">
+              <mat-icon class="gradient">mode_edit_outline</mat-icon>
             </button>
           </div>
         </div>
@@ -64,6 +59,7 @@
 <!-- if the details table is empty -->
 <ng-template #onEmpty>
   <section class="showcase-empty">
-    <p>Sie haben noch keine Zeit eingetragen.</p>
+    <h3 class="details-title gradient">Zeit eingetragen Details</h3>
+    <p>Sie haben noch kein Zeit eingetragen.</p>
   </section>
 </ng-template>

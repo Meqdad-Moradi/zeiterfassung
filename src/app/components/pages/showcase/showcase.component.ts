@@ -9,6 +9,8 @@ import { GetTimesService } from 'src/app/services/get-times.service';
 import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
 import { IMonth } from 'src/app/modules/month';
 import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToasterComponent } from '../../dialogs/toaster/toaster.component';
 
 @Component({
   selector: 'app-showcase',
@@ -20,7 +22,6 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   months: IMonth[] = [];
   timeStarted: boolean = false;
   selectedMonth!: string;
-  isDeleting: boolean = false;
 
   // subscription
   monthSubscription!: Subscription;
@@ -28,7 +29,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   constructor(
     private getTimesService: GetTimesService,
     private getMonthsService: GetMonthsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -106,6 +108,13 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       this.times = JSON.parse(
         localStorage.getItem(this.getTimesService.storeKey)!
       );
+
+      this.snackbar.openFromComponent(ToasterComponent, {
+        data: 'Zeit wurde erfolgreich gelöscht!',
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 2500,
+      });
     });
   }
 

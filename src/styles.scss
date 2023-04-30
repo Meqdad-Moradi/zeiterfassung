@@ -15,9 +15,16 @@
   --color-neutral-800: hsl(207, 7%, 25%);
   --color-neutral-900: hsl(204, 7%, 14%);
 
+  --gradient: linear-gradient(
+    -30deg,
+    var(--color-purple),
+    var(--color-secondary)
+  );
+
   --color-danger: hsl(4, 90%, 58%);
   --color-info: hsl(50, 82%, 55%);
-  --color-succed: hsl(139, 71%, 40%);
+  --color-succed: hsl(138, 57%, 50%);
+  --color-purple: hsl(313, 77%, 47%);
 
   --box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
@@ -85,4 +92,18 @@ h6 {
   font-size: 1.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.gradient {
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.truncate {
+  min-width: 3.4em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

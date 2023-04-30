@@ -7,54 +7,70 @@
     border-radius: 5px;
     box-shadow: var(--box-shadow);
 
-    .details-header {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
-      justify-content: space-between;
-      align-items: start;
-      gap: 2em;
-
-      .mat-form-field {
-        margin-left: auto;
-      }
+    .details-title {
+      margin-bottom: 1em;
+      max-width: max-content;
     }
   }
 
   article {
+    background-color: var(--color-neutral-100);
+    border-radius: 5px;
+    overflow: hidden;
+
     .time-details {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+      grid-template-columns: repeat(4, 1fr);
+      justify-content: space-between;
       align-items: center;
-      padding: 0.4em 5px;
+      gap: 2em;
+      padding: 0.5em;
 
       h5 {
-        color: var(--color-primary);
+        color: var(--color-neutral-50);
+        font-weight: 600;
       }
 
-      &:nth-of-type(2n) {
-        background-color: var(--color-neutral-100);
+      &:first-of-type {
+        background-color: var(--color-secondary);
+        background-color: var(--color-neutral-200);
+        background: var(--gradient);
+      }
+
+      &:not(:nth-of-type(1)) {
+        padding-block: 0;
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      .mat-form-field {
+        justify-self: end;
+        max-width: 10em;
       }
 
       .cta {
         display: flex;
-        gap: 0;
+        gap: 0.5em;
         justify-self: end;
 
         button {
-          background-color: transparent;
+          min-width: 0.5em !important;
+          padding: 0 0.3em !important;
 
-          &.edit {
+          &.edit-btn {
             color: var(--color-primary);
           }
 
-          &.delete {
+          &.delete-btn {
             color: var(--color-danger);
+          }
+
+          .mat-icon {
+            margin-left: 0;
           }
         }
 
         button .mat-icon {
           scale: 0.8;
-          margin-left: 0.2em;
         }
       }
     }
@@ -69,5 +85,47 @@
 
   .details-title {
     margin-bottom: 0.5em;
+    max-width: max-content;
+  }
+}
+
+// responsive table
+@media (max-width: 50em) {
+  .showcase {
+    .details {
+      padding: 1em;
+    }
+
+    article {
+      .time-details {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5em;
+
+        .mat-form-field {
+          max-width: 5em;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  .mat-form-field-wrapper {
+    background: var(--color-neutral-50);
+    padding: 0.4em 0.5em;
+    border-radius: 4px;
+
+    .mat-form-field-flex {
+      padding-top: 0 !important;
+    }
+
+    .mat-form-field-infix {
+      padding-block: 0;
+      border-top: 0;
+    }
   }
 }
