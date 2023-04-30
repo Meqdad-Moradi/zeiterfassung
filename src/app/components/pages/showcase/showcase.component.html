@@ -7,7 +7,7 @@
       <!-- articles -->
       <article>
         <div class="time-details">
-          <h5>Datum</h5>
+          <h5 class="truncate">Datum</h5>
           <h5>Von</h5>
           <h5>Bis</h5>
 
@@ -20,6 +20,7 @@
               [disableOptionCentering]="true"
             >
               <mat-option
+                class="truncate"
                 *ngFor="let monthName of months; let i = index"
                 [value]="monthName.id"
               >
@@ -30,7 +31,9 @@
         </div>
 
         <div class="time-details" *ngFor="let date of times">
-          <span>{{ date.startTime | date : "dd.MM.yyyy" }}</span>
+          <span class="truncate">{{
+            date.startTime | date : "dd.MM.yyyy"
+          }}</span>
           <span>{{ date.startTime | date : "HH:mm" }}</span>
           <span>{{ date.endTime | date : "HH:mm" }}</span>
           <div class="cta">

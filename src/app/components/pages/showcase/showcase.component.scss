@@ -27,12 +27,14 @@
       padding: 0.5em;
 
       h5 {
-        color: var(--color-neutral-800);
+        color: var(--color-neutral-50);
         font-weight: 600;
       }
 
       &:first-of-type {
+        background-color: var(--color-secondary);
         background-color: var(--color-neutral-200);
+        background: var(--gradient);
       }
 
       &:not(:nth-of-type(1)) {
@@ -42,7 +44,7 @@
 
       .mat-form-field {
         justify-self: end;
-        max-width: 6em;
+        max-width: 10em;
       }
 
       .cta {
@@ -93,12 +95,10 @@
     article {
       .time-details {
         grid-template-columns: repeat(4, 1fr);
+        gap: 0.5em;
 
-        .cta {
-          button {
-            min-width: 0.5em !important;
-            padding: 0 0.3em !important;
-          }
+        .mat-form-field {
+          max-width: 5em;
         }
       }
     }
@@ -111,7 +111,9 @@
   }
 
   .mat-form-field-wrapper {
-    padding-bottom: 0;
+    background: var(--color-neutral-100);
+    padding: 0.4em 0.5em;
+    border-radius: 4px;
 
     .mat-form-field-flex {
       padding-top: 0 !important;
