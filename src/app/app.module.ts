@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment.prod';
@@ -27,6 +25,10 @@ import { BannerComponent } from './components/pages/banner/banner.component';
 import { ToasterComponent } from './components/dialogs/toaster/toaster.component';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { DeleteConfirmationComponent } from './components/dialogs/delete-confirmation/delete-confirmation.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+// import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 registerLocaleData(localeDe, 'de');
 
@@ -49,11 +51,12 @@ registerLocaleData(localeDe, 'de');
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     { provide: DatePipe },
