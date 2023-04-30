@@ -23,8 +23,9 @@ export class EditTimeComponent implements OnInit {
   ngOnInit(): void {
     // set inputs value to edit start and end times
     this.data.forEach((date: ITime) => {
-      this.startTime = date.startTime.split('T')[1].slice(0, 5);
-      this.endTime = date.endTime.split('T')[1].slice(0, 5);
+      this.startTime =
+        date.startTime && date.startTime.split('T')[1].slice(0, 5);
+      this.endTime = date.endTime && date.endTime.split('T')[1].slice(0, 5);
       this.id = date.id;
     });
   }

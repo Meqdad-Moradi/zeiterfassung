@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { ITime, ITotalTimes } from '../modules/times';
 import { Observable, of, Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToasterComponent } from '../components/dialogs/toaster/toaster.component';
 // import {
 //   Firestore,
 //   addDoc,
@@ -30,17 +32,8 @@ export class GetTimesService {
   /**
    * constructor
    */
-  constructor() {
+  constructor(private snackbar: MatSnackBar) {
     this.loadTimesFromStorage();
-  }
-
-  /**
-   * check if the stop tracking button is clicked
-   */
-  isTimeStoped(): boolean {
-    const endTime =
-      this.times.length && this.times[this.times.length - 1].endTime;
-    return endTime ? true : false;
   }
 
   /**
@@ -54,7 +47,7 @@ export class GetTimesService {
   }
 
   /**
-   * addCurrentTime
+   * addStartTime
    */
   addStartTime(): void {
     // don't add start time if the time is not stoped
@@ -72,6 +65,14 @@ export class GetTimesService {
       endTime: '',
     };
     this.times.push(timeData);
+
+    this.snackbar.openFromComponent(ToasterComponent, {
+      data: 'Zeit wurde hinzugefügt!',
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 2500,
+    });
+
     localStorage.setItem('prevTime', JSON.stringify(now.format()));
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
@@ -87,7 +88,10 @@ export class GetTimesService {
       (time: ITime) => time.startTime === prevTime
     )!;
 
-    startedTime && (startedTime.endTime = now);
+    // return if the has not been started
+    if (!startedTime) return;
+
+    startedTime.endTime = now;
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
   }
 

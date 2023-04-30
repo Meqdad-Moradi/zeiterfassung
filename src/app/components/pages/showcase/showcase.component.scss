@@ -27,18 +27,15 @@
       padding: 0.5em;
 
       h5 {
-        color: var(--color-neutral-50);
         font-weight: 600;
       }
 
       &:first-of-type {
-        background-color: var(--color-secondary);
         background-color: var(--color-neutral-200);
-        background: var(--gradient);
       }
 
       &:not(:nth-of-type(1)) {
-        padding-block: 0;
+        padding-block: 0.3em;
         border-top: 1px solid var(--color-neutral-200);
       }
 
@@ -79,13 +76,9 @@
 
 // if the time details table is empty, show this style
 .showcase-empty {
-  padding: 1em;
-  background-color: hsl(50, 82%, 55%, 0.1);
-  border-left: 4px solid hsl(50, 82%, 55%);
-
-  .details-title {
-    margin-bottom: 0.5em;
-    max-width: max-content;
+  padding: 1em 0.5em;
+  p {
+    font-size: 1.4rem;
   }
 }
 

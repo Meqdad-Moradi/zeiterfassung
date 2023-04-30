@@ -1,7 +1,7 @@
 <section class="edit-time">
   <h1 class="gradient">Zeit bearbeiten</h1>
 
-  <div class="form-control" appearance="outline">
+  <div class="form-control" *ngIf="startTime">
     <input
       [(ngModel)]="startTime"
       type="time"
@@ -11,7 +11,7 @@
     <label for="startTime">Start</label>
   </div>
 
-  <div class="form-control" appearance="outline">
+  <div class="form-control" *ngIf="endTime">
     <input [(ngModel)]="endTime" type="time" id="endTime" placeholder="time" />
     <label for="endTime">Ende</label>
   </div>

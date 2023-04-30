@@ -5,16 +5,20 @@
   padding: 1.6em;
 
   h1 {
-    margin-bottom: 1em;
+    margin-bottom: .5em;
     color: var(--color-primary);
   }
 
   .form-control {
     position: relative;
 
+    &.notShow {
+      display: none;
+    }
+
     input {
       border: 2px solid var(--color-neutral-100);
-      padding: 0.5em;
+      padding: 0.6em 0.5em;
       border-radius: 5px;
       width: 100%;
       outline: none;
@@ -36,13 +40,14 @@
       transform: translateY(-50%);
       transition: all 0.3s ease-in-out;
       background-color: var(--color-neutral-50);
+      padding: 0 0.5em;
     }
 
     input:focus + label,
     input:not(:placeholder-shown) + label {
       top: 0;
       font-size: 10px;
-      left: 1em;
+      left: .5em;
     }
   }
 
@@ -50,6 +55,7 @@
     display: flex;
     gap: 2em;
     align-items: center;
+    margin-top: 1em;
   }
 
   .save-btn {
