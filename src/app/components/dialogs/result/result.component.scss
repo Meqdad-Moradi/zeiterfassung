@@ -1,24 +1,30 @@
 .result {
-  padding-block: 3em;
+  padding-block: 1em;
   text-align: center;
 
-  h1 {
+  .title {
     color: var(--color-primary);
-    margin-bottom: .5em;
+    margin-bottom: 1em;
   }
 
-  h4 {
+  .result {
     line-height: 2;
   }
 
   .content {
     display: grid;
     gap: 0.5em;
-    margin-bottom: 2em;
   }
 
   .close-btn {
     background-color: var(--color-primary);
     color: var(--color-neutral-50);
+    margin-top: 0.5em;
+  }
+
+  &::ng-deep {
+    .mat-form-field-wrapper {
+      background-color: var(--color-neutral-200);
+    }
   }
 }
