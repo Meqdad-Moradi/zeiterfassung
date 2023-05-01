@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IMonth } from '../modules/month';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +9,15 @@ import { Observable } from 'rxjs';
 export class GetMonthsService {
   constructor(private http: HttpClient) {}
 
-  fetchMonths(): Observable<any> {
-    return this.http.get('../assets/months.json');
+  fetchMonths(): Observable<IMonth[]> {
+    return this.http.get<IMonth[]>('../assets/months.json');
   }
 
   search(query: string): string[] {
     const terms = query.split(/\s+/); // split query into terms
     const filteredTerms = terms.filter((term) => term.length >= 3); // filter out terms with length < 3
     const queries = [...filteredTerms];
-    
+
     if (terms.length !== filteredTerms.length) {
       queries.push(query);
     }

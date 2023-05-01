@@ -16,5 +16,13 @@ footer {
   small {
     color: var(--color-neutral-500);
     margin-top: 1em;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+
+    svg{
+      width: .9em;
+      fill: var(--color-danger);
+    }
   }
 }

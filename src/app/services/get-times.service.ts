@@ -4,12 +4,15 @@ import { ITime, ITotalTimes } from '../modules/times';
 import { Observable, of, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToasterComponent } from '../components/dialogs/toaster/toaster.component';
-// import {
-//   Firestore,
-//   addDoc,
-//   collection,
-//   collectionData,
-// } from '@angular/fire/firestore';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  collectionData,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +35,11 @@ export class GetTimesService {
   /**
    * constructor
    */
-  constructor(private snackbar: MatSnackBar) {
+  constructor(private snackbar: MatSnackBar, private firestore: Firestore) {
     this.loadTimesFromStorage();
+    // this.collectData();
+    // this.updateDoc('n7eH2xZJO3wR7l9nZ7Ah');
+    // this.deletedDoc('5mn0ncxU7WS4wrZoqCkP');
   }
 
   /**
@@ -75,7 +81,41 @@ export class GetTimesService {
 
     localStorage.setItem('prevTime', JSON.stringify(now.format()));
     localStorage.setItem(this.storeKey, JSON.stringify(this.times));
+
+    // const collectionInstance = collection(this.firestore, 'zeiterfassung');
+    // addDoc(collectionInstance, timeData)
+    //   .then(() => {
+    //     console.log('time added');
+    //   })
+    //   .catch((err) => console.log(err));
   }
+
+  // collectData(): void {
+  //   const collectionInstance = collection(this.firestore, 'zeiterfassung');
+  //   collectionData(collectionInstance, { idField: 'id' }).subscribe((val) =>
+  //     console.log(val)
+  //   );
+  // }
+
+  // updateDoc(id: string): void {
+  //   const docInstance = doc(this.firestore, 'zeiterfassung', id);
+  //   const newDate = { endTime: moment().format() };
+
+  //   updateDoc(docInstance, newDate)
+  //     .then(() => {
+  //       console.log('updated');
+  //     })
+  //     .catch((err) => console.error(err));
+  // }
+
+  // deletedDoc(id: string): void {
+  //   const docInstance = doc(this.firestore, 'zeiterfassung', id);
+  //   deleteDoc(docInstance)
+  //     .then(() => {
+  //       console.log('deleted');
+  //     })
+  //     .catch((err) => console.error(err));
+  // }
 
   /**
    * addEndtime
