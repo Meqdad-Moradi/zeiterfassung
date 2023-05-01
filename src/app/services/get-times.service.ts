@@ -107,13 +107,18 @@ export class GetTimesService {
    * Returns total hours and minutes of stored times
    * @returns hours and minutes
    */
-  getTotalHoursMinutes(): Observable<ITotalTimes> {
+  getTotalHoursMinutes(currentMonth: number): Observable<ITotalTimes> {
     // Retrieve stored times from local storage
     const storedTimes = JSON.parse(localStorage.getItem(this.storeKey)!);
 
     // Calculate hours and minutes for each stored time
     const arr = storedTimes
-      .filter((item: ITime) => item.endTime !== '' && item.startTime !== '')
+      .filter(
+        (item: ITime) =>
+          item.endTime !== '' &&
+          item.startTime !== '' &&
+          item.month === currentMonth
+      )
       .map((date: ITime) => {
         // Convert start and end times to moment objects
         const startTime = moment(date.startTime);

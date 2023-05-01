@@ -13,7 +13,6 @@
 
           <!-- select the month -->
           <mat-form-field appearance="standard">
-            <!-- <mat-label>Monat auswählen</mat-label> -->
             <mat-select
               (valueChange)="filterTimes($event)"
               [value]="selectedMonth"
@@ -21,7 +20,7 @@
             >
               <mat-option
                 class="truncate"
-                *ngFor="let monthName of months; let i = index"
+                *ngFor="let monthName of months"
                 [value]="monthName.id"
               >
                 {{ monthName.month }}

@@ -1,8 +1,25 @@
 <section class="result">
   <div class="container">
-    <h1 class="gradient">Ergebnis</h1>
+    <h1 class="title gradient">Ergebnis</h1>
     <div class="content">
-      <h4 *ngIf="data | async as totalTime">
+      <!-- select the month -->
+      <mat-form-field appearance="standard">
+        <mat-select
+          (valueChange)="onChangeMonth($event)"
+          [value]="selectedMonth"
+          [disableOptionCentering]="true"
+        >
+          <mat-option
+            class="truncate"
+            *ngFor="let monthName of months$ | async"
+            [value]="monthName.id"
+          >
+            {{ monthName.month }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h4 class="result" *ngIf="totalTime$ | async as totalTime">
         Aktuell Stundenstand:
         {{
           totalTime.hour.toString().padStart(2, "0") +
