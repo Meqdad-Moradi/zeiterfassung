@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShowcaseComponent } from './showcase.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('ShowcaseComponent', () => {
   let component: ShowcaseComponent;
@@ -8,9 +9,9 @@ describe('ShowcaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowcaseComponent ]
-    })
-    .compileComponents();
+      declarations: [ShowcaseComponent],
+      imports: [MatSnackBarModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShowcaseComponent);
     component = fixture.componentInstance;

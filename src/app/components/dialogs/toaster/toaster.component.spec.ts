@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToasterComponent } from './toaster.component';
+import {
+  MAT_SNACK_BAR_DATA,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar';
 
 describe('ToasterComponent', () => {
   let component: ToasterComponent;
@@ -8,9 +12,12 @@ describe('ToasterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToasterComponent ]
-    })
-    .compileComponents();
+      declarations: [ToasterComponent],
+      providers: [
+        { provide: MatSnackBarRef, useValue: {} },
+        { provide: MAT_SNACK_BAR_DATA, useValue: {} },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ToasterComponent);
     component = fixture.componentInstance;
