@@ -107,3 +107,25 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Set the scrollbar width and height */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track styles */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Thumb styles */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Hover styles */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

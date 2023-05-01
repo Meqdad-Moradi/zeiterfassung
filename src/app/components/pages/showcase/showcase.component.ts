@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { IMonth } from 'src/app/modules/month';
 import { ITime } from 'src/app/modules/times';
 import { GetMonthsService } from 'src/app/services/get-months.service';
 import { GetTimesService } from 'src/app/services/get-times.service';
-import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
-import { IMonth } from 'src/app/modules/month';
 import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { EditTimeComponent } from '../../dialogs/edit-time/edit-time.component';
 import { ToasterComponent } from '../../dialogs/toaster/toaster.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { ToasterComponent } from '../../dialogs/toaster/toaster.component';
 export class ShowcaseComponent implements OnInit, OnDestroy {
   times: ITime[] = [];
   months: IMonth[] = [];
-  selectedMonth!: string;
+  selectedMonth!: number;
 
   // subscription
   monthSubscription!: Subscription;

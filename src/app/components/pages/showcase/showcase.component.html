@@ -17,6 +17,7 @@
               (valueChange)="filterTimes($event)"
               [value]="selectedMonth"
               [disableOptionCentering]="true"
+              matTooltip="Monat auswählen"
             >
               <mat-option
                 class="truncate"
@@ -41,6 +42,7 @@
               <button
                 class="btn delete-btn"
                 mat-button
+                matTooltip="Zeit löschen"
                 (click)="deleteTime(date.id)"
               >
                 <mat-icon>delete_outline</mat-icon>
@@ -49,6 +51,7 @@
               <button
                 class="btn edit-btn"
                 mat-button
+                matTooltip="Zeit bearbeiten"
                 (click)="editTime(date.id)"
               >
                 <mat-icon class="gradient">mode_edit_outline</mat-icon>
